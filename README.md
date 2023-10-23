@@ -132,3 +132,4 @@ sudo chmod -R 775 .
 - Coller dans le terminal conteneur Docker App : Ctrl+Shift+V
 - Récupérer commande précédente dans le terminal Ubuntu : Flèche directionnel haut
 - Un service mailer (mailhog) est en place sur l'environnement Docker et accessible depuis http://localhost:8025/
+- Parfois le conteneur database ne démarre pas correctement la première fois, il faut le démarrer manuellement depuis Docker Desktop -> Containeurs
