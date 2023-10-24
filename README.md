@@ -32,7 +32,7 @@ Créer un compte [Docker Hub](https://hub.docker.com/) et connectez-vous sur l'a
 ![](img/Screenshot_5.png)
 
 ### Depuis le terminal Ubuntu, aller dans le dossier du projet souhaité et ouvrir VS Code pour travailler sur le projet.
-*Une extension VS Code permet de correctement configurer l'outil pour un environnement WSL2.*
+*Si besoin récupérer vos settings en les synchronisants avec votre compte GitHub puis installer les extensions "WSL" et "Docker".*
 
 ![](img/Screenshot_6.png)
 
