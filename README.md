@@ -31,6 +31,7 @@ Créer un compte [Docker Hub](https://hub.docker.com/) et connectez-vous sur l'a
 
 ![](img/Screenshot_5.png)
 
+
 ### Depuis le terminal Ubuntu, aller dans le dossier du projet souhaité et ouvrir VS Code pour travailler sur le projet.
 *Si besoin récupérer vos settings en les synchronisants avec votre compte GitHub puis installer les extensions "WSL" et "Docker".*
 
@@ -133,3 +134,4 @@ sudo chmod -R 775 .
 - Récupérer commande précédente dans le terminal Ubuntu : Flèche directionnel haut
 - Un service mailer (mailhog) est en place sur l'environnement Docker et accessible depuis http://localhost:8025/
 - Parfois le conteneur database ne démarre pas correctement la première fois, il faut le démarrer manuellement depuis Docker Desktop -> Containeurs
+- Si les commandes sudo ne fonctionnent pas sur Ubuntu, suivez ce [guide](https://www.it-connect.fr/commande-sudo-comment-configurer-sudoers-sous-linux/)
