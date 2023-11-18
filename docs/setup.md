@@ -22,7 +22,20 @@ Créer un dossier de travail "home/username/www" pour les futurs projets.\
 sudo apt update
 ```
 
-### Installer VS Code
-[Suivre la documentation.](https://code.visualstudio.com/docs/setup/linux)\
-VS Code est désormais disponnible avec la commande "code path/to/project".\
+### Configuration Git et GitHub
+```bash
+git config --global user.name "Username"
+```
+```bash
+git config --global user.email "username@email.com"
+```
+```bash
+git config --global init.defaultBranch main
+```
+#### Clés SSH
+
+### Configuration VS Code
+[Documentation](https://code.visualstudio.com/docs/remote/wsl-tutorial)\
+Utilisation de l'extension WSL.\
 Connexion au compte GitHub depuis VS Code pour synchroniser les settings.
+
