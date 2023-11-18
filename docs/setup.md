@@ -10,4 +10,19 @@ Docker est un outil de conteneurisation qui permet aux développeurs de créer, 
 
 ## Installation
 
-### Installation et premier lancement de la distribution Linux
+### Premier lancement et configuration de la distribution Linux
+![](img/Screenshot_1.png)
+L'environnement de la distribution Linux est également accessible depuis l'explorateur de fichiers Windows.
+![](img/Screenshot_2.png)
+Créer un dossier de travail "home/username/www" pour les futurs projets.
+![](img/Screenshot_3.png)
+
+### Mettre à jour l'environnement 
+```bash
+sudo apt update
+```
+
+### Installer VS Code
+[Suivre la documentation.](https://code.visualstudio.com/docs/setup/linux)\
+VS Code est désormais disponnible avec la commande "code path/to/project".\
+Connexion au compte GitHub depuis VS Code pour synchroniser les settings.
