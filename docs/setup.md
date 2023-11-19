@@ -1,7 +1,8 @@
-# Mise en place Docker
+# Mise en place Docker avec WSL2 (Ubuntu)
 
 ## Introduction
-Docker est un outil de conteneurisation qui permet aux développeurs de créer, déployer et exécuter des applications dans des environnements isolés appelés conteneurs. Il offre une grande portabilité et assure la consistance entre les environnements de développement et de production, simplifiant ainsi le processus de développement dans un projet informatique.
+Docker est un outil de conteneurisation qui permet aux développeurs de créer, déployer et exécuter des applications dans des environnements isolés appelés conteneurs. Il offre une grande portabilité et assure la consistance entre les environnements de développement et de production, simplifiant ainsi le processus de développement dans un projet informatique.\
+WSL2 (Windows Subsystem for Linux version 2) est une fonctionnalité de Windows 10 et 11 permettant d'exécuter un environnement Linux directement sous Windows. Il combine la facilité d'utilisation de Windows avec la puissance et la flexibilité de Linux, offrant une compatibilité améliorée et des performances accrues pour les développeurs souhaitant utiliser des outils Linux sur leur machine Windows.
 
 ## Prérequis
 - Installer [Docker Desktop](https://www.docker.com/products/docker-desktop/)
