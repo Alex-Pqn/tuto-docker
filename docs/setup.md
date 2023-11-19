@@ -60,6 +60,10 @@ alias dcomposeup="docker-compose up"
 alias dcomposeupd="docker-compose up -d"
 alias dcomposedown="docker-compose down"
 ```
+Après avoir modifié le fichier il doit être rechargé avec la commande suivante :
+```bash
+. ~/.bashrc
+```
 
 ### Configuration Git
 ```bash
