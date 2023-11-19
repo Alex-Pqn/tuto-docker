@@ -10,19 +10,72 @@ Docker est un outil de conteneurisation qui permet aux développeurs de créer, 
 
 ## Installation
 
-### Premier lancement et configuration de la distribution Linux
+### Configuration de la distribution Linux
+Lors du premier lancement l'environnement doit s'installer correctement.
 ![](img/Screenshot_1.png)
-L'environnement de la distribution Linux est également accessible depuis l'explorateur de fichiers Windows.
+L'environnement est désormais accessible depuis l'explorateur de fichiers Windows.
 ![](img/Screenshot_2.png)\
-Créer un dossier de travail "home/username/www" pour les futurs projets.\
+Créer un dossier de travail "home/username/www".\
 ![](img/Screenshot_3.png)
 
 ### Mettre à jour l'environnement 
 ```bash
 sudo apt update
 ```
+```bash
+sudo apt upgrade -y
+```
+```bash
+sudo apt autoremove
+```
+```bash
+sudo apt clean
+```
 
-### Configuration Git et GitHub
+### Ajouter une configuration personnalisée à la fin du fichier "home/username/.bashrc"
+```bash
+# Alias navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias ll="ls -lah"
+alias la="ls -lAh"
+alias l="ls -CF"
+
+# Alias Git
+alias gs="git status"
+alias gl="git log --oneline --all --graph --decorate  $*"
+alias ga="git add"
+alias gc="git commit"
+alias gpush="git push"
+alias gpull="git pull"
+alias gd="git diff"
+alias gch="git checkout"
+
+# Alias Docker
+alias dcompose="docker-compose"
+alias dcomposebuild="docker-compose up --build"
+alias dcomposeup="docker-compose up"
+alias dcomposeupd="docker-compose up -d"
+alias dcomposedown="docker-compose down"
+
+# Alias PHP/Symfony
+alias phpcache="php bin/console cache:clear"
+alias phptestcoverage="php bin/phpunit --coverage-html tests/test-coverage"
+alias phptest="php bin/phpunit"
+alias composeri="composer install"
+alias composerupd="composer update"
+alias composerupg="composer upgrade"
+
+# Alias Node/NPM
+alias npm-global="npm list -g --depth 0"
+alias nr="npm run"
+alias ni="npm install"
+alias nis="npm install --save"
+alias nid="npm install --save-dev"
+```
+
+### Configuration Git
 ```bash
 git config --global user.name "Username"
 ```
@@ -32,7 +85,15 @@ git config --global user.email "username@email.com"
 ```bash
 git config --global init.defaultBranch main
 ```
-#### Clés SSH
+```bash
+git config --global color.ui auto
+```
+```bash
+git config --global core.autocrlf input
+```
+
+### Clés SSH GitHub
+[Suivre ce guide](https://kinsta.com/blog/generate-ssh-key/)
 
 ### Configuration VS Code
 [Documentation](https://code.visualstudio.com/docs/remote/wsl-tutorial)\
