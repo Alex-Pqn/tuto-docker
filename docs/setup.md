@@ -5,13 +5,13 @@ Docker est un outil de conteneurisation qui permet aux développeurs de créer, 
 
 ## Prérequis
 - Installer [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- Installer une distribution Linux (par exemple Ubuntu depuis le Microsoft Store, installation en ligne de commande également possible)
+- Installer une distribution Linux depuis le Microsoft Store, Ubuntu dans cet exemple (installation en ligne de commande PowerShell également possible)
 - Activer la fonctionnalité Windows "Plateforme de machine virtuelle" puis redémarer le PC (Pannneau de configuration -> Programmes -> Activer ou désactiver des fonctionnalités Windows)
 
 ## Installation
 
 ### Configuration de la distribution Linux
-Lors du premier lancement l'environnement doit s'installer correctement.
+Lors du premier lancement l'environnement doit être installer et configurer.
 ![](img/Screenshot_1.png)
 L'environnement est désormais accessible depuis l'explorateur de fichiers Windows ("\\wsl.localhost\Ubuntu").
 ![](img/Screenshot_2.png)\
