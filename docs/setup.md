@@ -103,9 +103,9 @@ L'extension WSL devrait être active et votre compte GitHub a du être automatiq
 
 ### Configuration Docker Desktop
 Ouvrir Docker Desktop et activer "WSL integration" en ajoutant la bonne distribution (ne pas oublier d'appliquer pour sauvegarder les changements).
-![](img/Screenshot_6.png)
+![](img/Screenshot_6.png)\
 Conseil : Connecté vous avec votre compte [Docker Hub](https://hub.docker.com/) depuis Docker Desktop.
 
 ## Conclusion
-L'environnement WSL2 est désormais correctement configuré pour utiliser Docker dans de bonnes conditions.
+L'environnement WSL2 est désormais correctement configuré pour utiliser Docker dans de bonnes conditions.\
 Pour mettre en place l'environnement Docker [suivre ce guide]().
