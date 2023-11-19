@@ -1,4 +1,4 @@
-# Mise en place Docker avec WSL2 (Ubuntu)
+# Mise en place de l'environnement WSL2 (Ubuntu) pour Docker
 
 ## Introduction
 Docker est un outil de conteneurisation qui permet aux développeurs de créer, déployer et exécuter des applications dans des environnements isolés appelés conteneurs. Il offre une grande portabilité et assure la consistance entre les environnements de développement et de production, simplifiant ainsi le processus de développement dans un projet informatique.\
