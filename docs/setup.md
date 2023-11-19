@@ -13,7 +13,7 @@ Docker est un outil de conteneurisation qui permet aux développeurs de créer, 
 ### Configuration de la distribution Linux
 Lors du premier lancement l'environnement doit s'installer correctement.
 ![](img/Screenshot_1.png)
-L'environnement est désormais accessible depuis l'explorateur de fichiers Windows.
+L'environnement est désormais accessible depuis l'explorateur de fichiers Windows ("\\wsl.localhost\Ubuntu").
 ![](img/Screenshot_2.png)\
 Créer un dossier de travail "home/username/www".\
 ![](img/Screenshot_3.png)
