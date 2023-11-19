@@ -67,6 +67,7 @@ Après avoir modifié le fichier il doit être rechargé avec la commande suivan
 ```
 
 ### Configuration Git
+Git est déjà installé par défaut sur la distribution Ubuntu.
 ```bash
 git config --global user.name "Username"
 ```
@@ -87,7 +88,7 @@ git config --global core.autocrlf input
 [Suivre ce guide](https://kinsta.com/blog/generate-ssh-key/)
 
 ### Configuration VS Code
-Dans un premier temps [télécharger VS Code](https://code.visualstudio.com/) en local (Windows), ajouter l'extension WSL et connecter votre compte GitHub pour synchroniser vos paramètres.
+Dans un premier temps [télécharger VS Code](https://code.visualstudio.com/) en local (Windows), ajouter l'extension WSL et connecter votre compte GitHub pour synchroniser vos paramètres.\
 Cloner un projet (cela permet au passage de tester la connexion SSH précédement configurée).
 ```bash
 git clone git@github.com:Username/project-name.git
