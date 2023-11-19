@@ -87,7 +87,15 @@ git config --global core.autocrlf input
 [Suivre ce guide](https://kinsta.com/blog/generate-ssh-key/)
 
 ### Configuration VS Code
-[Documentation](https://code.visualstudio.com/docs/remote/wsl-tutorial)\
-Utilisation de l'extension WSL.\
-Connexion au compte GitHub depuis VS Code pour synchroniser les settings.
-
+Dans un premier temps [télécharger VS Code](https://code.visualstudio.com/) en local (Windows), ajouter l'extension WSL et connecter votre compte GitHub pour synchroniser vos paramètres.
+Cloner un projet (cela permet au passage de tester la connexion SSH précédement configurée).
+```bash
+git clone git@github.com:Username/project-name.git
+```
+Ouvrir le projet avec la commande ci-dessous, VS Code sera automatiquement installé lors du premier lancement et mise à jour si nécessaire par la suite.
+```bash
+code path/to/project-name
+```
+![](img/Screenshot_4.png)
+L'extension WSL devrait être active et votre compte GitHub a du être automatiquement connecté afin de synchroniser vos paramètres.
+![](img/Screenshot_5.png)
