@@ -59,21 +59,6 @@ alias dcomposebuild="docker-compose up --build"
 alias dcomposeup="docker-compose up"
 alias dcomposeupd="docker-compose up -d"
 alias dcomposedown="docker-compose down"
-
-# Alias PHP/Symfony
-alias phpcache="php bin/console cache:clear"
-alias phptestcoverage="php bin/phpunit --coverage-html tests/test-coverage"
-alias phptest="php bin/phpunit"
-alias ci="composer install"
-alias cupd="composer update"
-alias cupg="composer upgrade"
-
-# Alias Node/NPM
-alias npm-global="npm list -g --depth 0"
-alias nr="npm run"
-alias ni="npm install"
-alias nis="npm install --save"
-alias nid="npm install --save-dev"
 ```
 
 ### Configuration Git
