@@ -45,7 +45,7 @@ alias l="ls -CF"
 # Alias Git
 alias gs="git status"
 alias gl="git log --oneline --all --graph --decorate  $*"
-alis glist="git config –global –list"
+alias glist="git config –global –list"
 alias ga="git add"
 alias gc="git commit"
 alias gpush="git push"
