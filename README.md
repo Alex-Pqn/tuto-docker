@@ -14,7 +14,7 @@ WSL2 (Windows Subsystem for Linux version 2) est une fonctionnalité de Windows 
 ### Configuration de la distribution Linux
 Lors du premier lancement l'environnement doit être installer et configurer.\
 ![](docs/img/Screenshot_1.png)\
-L'environnement est désormais accessible depuis l'explorateur de fichiers Windows("\\wsl.localhost\Ubuntu").\
+L'environnement est désormais accessible depuis l'explorateur de fichiers Windows ("\\wsl.localhost\Ubuntu").\
 ![](docs/img/Screenshot_2.png)\
 Créer un dossier de travail "home/username/www".\
 ![](docs/img/Screenshot_3.png)
@@ -32,6 +32,7 @@ sudo apt autoremove
 ```bash
 sudo apt clean
 ```
+Si les commandes sudo ne fonctionnent pas, suivez ce [guide](https://www.it-connect.fr/commande-sudo-comment-configurer-sudoers-sous-linux/).
 
 ### Ajouter une configuration personnalisée à la fin du fichier "home/username/.bashrc"
 ```bash
@@ -89,6 +90,7 @@ git config --global core.autocrlf input
 
 ### Configuration VS Code
 Dans un premier temps [télécharger VS Code](https://code.visualstudio.com/) en local (Windows), ajouter l'extension WSL et connecter votre compte GitHub pour synchroniser vos paramètres.\
+Vous pouvez également utiliser les extensions Docker et Dev Containers.\
 Cloner un projet (cela permet au passage de tester la connexion SSH précédement configurée).
 ```bash
 git clone git@github.com:Username/project-name.git
@@ -106,6 +108,11 @@ L'extension WSL devrait être active et votre compte GitHub a du être automatiq
 Ouvrir Docker Desktop et activer "WSL integration" en ajoutant la bonne distribution (ne pas oublier d'appliquer pour sauvegarder les changements).\
 ![](docs/img/Screenshot_6.png)\
 Conseil : Connecté vous avec votre compte [Docker Hub](https://hub.docker.com/) depuis Docker Desktop.
+
+### Configuration WSL2
+Afin d'éviter les chutes de performance, limiter les ressources allouées aux distributions WSL2.\
+Créer un fichier ".wslconfig" depuis "Windows -> C:/Users/Username" et configurer ce fichier selon vos besoins.\
+![](docs/img/Screenshot_7.png)
 
 ## Conclusion
 L'environnement WSL2 est désormais correctement configuré pour utiliser Docker dans de bonnes conditions.\
