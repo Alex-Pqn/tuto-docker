@@ -1,8 +1,8 @@
-# Utilisez une image Node.js officielle avec Apache
+# Image Node.js officielle
 FROM node:18
 
-# Installez les dépendances système + Apache
-RUN apt-get update && apt-get install -y apache2 curl netcat-openbsd && apt-get clean
+# Installation système (Apache : serveur web, curl+netcat-openbsd : utilisés dans le script de démarrage)
+RUN apt-get update && apt-get install -y apache2 curl netcat-openbsd && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configuration Apache pour servir l'application React depuis /var/www/html/app/public
 RUN echo '<Directory /var/www/html/app/public>\n\
@@ -11,38 +11,28 @@ RUN echo '<Directory /var/www/html/app/public>\n\
     Require all granted\n\
 </Directory>' > /etc/apache2/sites-available/000-default.conf
 
-# Copier les fichiers de l'application dans le conteneur
+# Définir le répertoire de travail dans le dossier app, copier les fichiers package*.json et installer les dépendances npm
+WORKDIR /var/www/html/app
+COPY app/package*.json ./
+RUN npm ci
+
+# Retourner dans le répertoire de travail principal et copier le reste du contenu du projet, en respectant .dockerignore
+WORKDIR /var/www/html
 COPY . /var/www/html
 
-# Installer les dépendances dans le répertoire app
-RUN mkdir /var/www/html/app/node_modules && chown node:node /var/www/html/app/node_modules
-WORKDIR /var/www/html/app
-USER node
-COPY --chown=node:node app/package*.json /var/www/html/app/
-RUN npm install
-COPY --chown=node:node . /var/www/html/app
-
-USER root
-
-# Retourner dans le répertoire de travail principal
-WORKDIR /var/www/html
-
-# Permission pour éxécuter le script de démarrage
+# Permission pour exécuter le script de démarrage
 RUN chmod +x /var/www/html/start.sh
 
 # Exécuter le script de démarrage
 CMD ["sh", "/var/www/html/start.sh"]
 
-# Variables utilisateurs
-ARG UID=1001
-ARG GID=1001
+# L'utilisation d'un utilisateur non-root pour lancer le conteneur est recommandée
+# Impossible d'utiliser un utilisateur non-root dans le contexte actuel car cela provoque des problèmes de permissions npm
+# Les lignes suivantes sont donc commentées
 
-# Créer un utilisateur webuser avec les UID et GID spécifiés
-RUN groupadd -g ${GID} webuser && useradd -u ${UID} -g webuser -s /bin/bash -m webuser
+# Permissions pour l'utilisateur 'node' sur tout le projet
+# RUN chown -R node:node /var/www/html/ && \
+#     chmod -R u+w /var/www/html/
 
-# S'assurer que tous les fichiers dans /var/www/html sont accessibles par webuser
-RUN chown -R webuser:webuser /var/www/html
-RUN chmod -R 755 /var/www/html
-
-# Utiliser l'utilisateur webuser
-USER webuser
+# Utilisateur 'node'
+# USER node

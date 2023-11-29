@@ -90,7 +90,7 @@ git config --global core.autocrlf input
 
 ### Configuration VS Code
 Dans un premier temps [télécharger VS Code](https://code.visualstudio.com/) en local (Windows), ajouter l'extension WSL et connecter votre compte GitHub pour synchroniser vos paramètres.\
-Vous pouvez également utiliser les extensions Docker et Dev Containers.\
+Il est également recommander d'utiliser les extensions Docker et Dev Containers.\
 Cloner un projet (cela permet au passage de tester la connexion SSH précédement configurée).
 ```bash
 git clone git@github.com:Username/project-name.git

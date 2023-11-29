@@ -12,11 +12,11 @@ Après avoir configuré WSL2 et Docker Desktop, il est important de comprendre c
 ### Fichier Dockerfile
 Le fichier "Dockerfile" est un script de configuration utilisé pour automatiser le processus de création d'une image Docker. Il contient une série d'instructions pour installer des logiciels, copier des fichiers, et configurer des paramètres.
 ```bash
-# Utilisez une image Node.js officielle avec Apache
+# Image Node.js officielle
 FROM node:18
 
-# Installez les dépendances système + Apache
-RUN apt-get update && apt-get install -y apache2 curl netcat-openbsd && apt-get clean
+# Installation système (Apache : serveur web, curl+netcat-openbsd : utilisés dans le script de démarrage)
+RUN apt-get update && apt-get install -y apache2 curl netcat-openbsd && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configuration Apache pour servir l'application React depuis /var/www/html/app/public
 RUN echo '<Directory /var/www/html/app/public>\n\
@@ -25,30 +25,31 @@ RUN echo '<Directory /var/www/html/app/public>\n\
     Require all granted\n\
 </Directory>' > /etc/apache2/sites-available/000-default.conf
 
-# Définir le répertoire de travail
+# Définir le répertoire de travail dans le dossier app, copier les fichiers package*.json et installer les dépendances npm
+WORKDIR /var/www/html/app
+COPY app/package*.json ./
+RUN npm ci
+
+# Retourner dans le répertoire de travail principal et copier le reste du contenu du projet, en respectant .dockerignore
 WORKDIR /var/www/html
+COPY . /var/www/html
 
-# Variables utilisateurs
-ARG UID=1001
-ARG GID=1001
-
-# Créer un utilisateur webuser avec les UID et GID spécifiés
-RUN groupadd -g ${GID} webuser && useradd -u ${UID} -g webuser -s /bin/bash -m webuser
-
-# Changer le propriétaire du répertoire de travail pour webuser
-RUN chown -R webuser:webuser /var/www/html
-
-# Copier les fichiers de l'application dans le répertoire de travail avec les bonnes permissions
-COPY --chown=webuser:webuser . /var/www/html
-
-# Permission pour éxécuter le script de démarrage
+# Permission pour exécuter le script de démarrage
 RUN chmod +x /var/www/html/start.sh
 
 # Exécuter le script de démarrage
 CMD ["sh", "/var/www/html/start.sh"]
 
-# Utiliser l'utilisateur webuser
-USER webuser
+# L'utilisation d'un utilisateur non-root pour lancer le conteneur est recommandée
+# Impossible d'utiliser un utilisateur non-root dans le contexte actuel car cela provoque des problèmes de permissions npm
+# Les lignes suivantes sont donc commentées
+
+# Permissions pour l'utilisateur 'node' sur tout le projet
+# RUN chown -R node:node /var/www/html/ && \
+#     chmod -R u+w /var/www/html/
+
+# Utilisateur 'node'
+# USER node
 ```
 
 ### Fichier docker-compose.yml
@@ -58,36 +59,41 @@ Dans notre cas ce fichier permet également d'initialiser la base de données pr
 version: '3.8'
 services:
   app:
+    container_name: react-app # Nom du conteneur
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: . # Dossier de build (le dossier courant dans notre cas)
+      dockerfile: Dockerfile # Fichier de build (Dockerfile dans notre cas, on pourrait aussi utiliser Dockerfile.dev pour un environnement de développement)
     ports:
-      - 3000:3000
+      - 3000:3000 # Port d'écoute de l'application React (3000:3000 par défaut)
     volumes:
-      - .:/var/www/html
+      - .:/var/www/html # Volume pour tout le projet
+      - /var/www/html/app/node_modules # Volume pour les modules node_modules (pour éviter de les installer dans le conteneur)
     env_file:
-      - .env
+      - .env # Utilisation du fichier .env pour les variables d'environnement
     depends_on:
-      - database
-      - mailhog
+      - database # Dépendance au conteneur de la base de données
+      - mailhog # Dépendance au conteneur de MailHog
+    #user: node # Utilisateur node pour le conteneur de l'application React (non utilisé dans notre cas, problème de permissions npm)
 
   database:
+    container_name: database # Nom du conteneur
     image: mysql:5.7
     volumes:
-      - database_data:/var/lib/mysql
-      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - database_data:/var/lib/mysql # Volume pour les données de MySQL
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql # Script SQL d'initialisation de la base de données depuis le fichier init-db.sql
     ports:
-      - 3310:3306
+      - 3310:3306 # Port d'écoute de MySQL (3310:3306 pour éviter les conflits avec une éventuelle installation locale de MySQL -> 3306:3306 par défaut)
     env_file:
-      - .env
+      - .env # Utilisation du fichier .env pour les variables d'environnement
 
   mailhog:
-    image: mailhog/mailhog
+    container_name: mailhog # Nom du conteneur
+    image: mailhog/mailhog # Image Docker de MailHog
     ports:
-      - 8025:8025
+      - 8025:8025 # Port d'écoute de MailHog (8025:8025 par défaut)
 
 volumes:
-  database_data: {}
+  database_data: {} # Volume pour les données de MySQL
 ```
 
 ### Fichier start.sh
@@ -112,9 +118,6 @@ echo "start.sh : MySQL started"
 
 # Changer de répertoire vers /var/www/html/app
 cd /var/www/html/app
-
-# Installer les dépendances de l'application React
-npm install
 
 # Démarrer l'application React avec npm start
 npm start &
@@ -189,7 +192,7 @@ docker builder prune
 ## Autres commandes utiles
 Utiliser le flag "-d" afin d'éxécuter les commandes en "fond" et maintenir le terminal utilisable
 ```bash
-docker-compose up -d 
+docker-compose up -d
 docker-compose up --build -d
 ```
 Lancer un build sans cache 
@@ -220,6 +223,12 @@ Nettoyer le terminal
 ```bash
 clear
 ```
+
+## Axes d'amélioration
+Bien que notre configuration Docker actuelle fonctionne correctement, certains aspects pourraient être améliorés pour optimiser l'efficacité :
+- Apache avec Node.js/React : L'utilisation d'Apache n'est pas l'idéal pour un projet Node.js/React. Conçu principalement pour des applications PHP, Apache ne profite pas pleinement des caractéristiques de Node.js, ce qui pourrait limiter les performances de notre application.
+- Image Node-Alpine : Nous pourrions bénéficier de l'utilisation de l'image Node-Alpine. Plus légère et compacte, cette image améliore les performances et accélère le déploiement de nos conteneurs, offrant ainsi une solution plus efficiente.
+- Exécution du conteneur en tant qu'utilisateur non-root : Pour des raisons de sécurité, il est préférable d'exécuter les conteneurs en tant qu'utilisateur non-root. Cependant, dans notre configuration actuelle, cela entraîne des problèmes de permissions avec npm, nous forçant à utiliser l'utilisateur root.
 
 ## Astuces
 - Forcer l'arrêt du conteneur depuis le terminal Ubuntu : Ctrl+Shift+C
