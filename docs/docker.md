@@ -4,7 +4,7 @@
 Après avoir configuré WSL2 et Docker Desktop, il est important de comprendre comment utiliser efficacement cet environnement pour le développement. Ce guide se concentre sur l'utilisation des fichiers Dockerfile, docker-compose.yml et d'un script de démarrage start.sh.
 
 ## Prérequis
-- Docker Desktop doit être lancer
+- Docker Desktop doit être lancer (la distribution WSL2 (Ubuntu) doit être démarrer en premier, ensuite Docker Desktop)
 - Les fichiers Docker (Dockerfile, docker-compose.yml, etc) doivent être présents à la racine du projet
 
 ## Présentation
